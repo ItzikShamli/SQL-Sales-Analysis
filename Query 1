@@ -1,0 +1,9 @@
+WITH total AS 
+    (SELECT seller_id, SUM(price) AS total_sales FROM Sales GROUP BY seller_id) # This CTE retrieves all the sellers and their total sales
+
+SELECT 
+    seller_id
+FROM 
+    total
+WHERE 
+    total_sales = (SELECT MAX(total_sales) FROM total) # this is the filtering line that retreives the seller/all the sellers who performed best
